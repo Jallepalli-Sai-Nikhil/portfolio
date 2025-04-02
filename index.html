@@ -33,28 +33,84 @@
             color: black;
             font-weight: bold;
             margin: 0 15px;
+            position: relative; /* For underline positioning */
+        }
+        nav a:hover, nav a:focus {
+            color: #ffb703; /* Yellow hover effect */
+        }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px; /* Position underline slightly below the text */
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #ffb703; /* Yellow underline */
+            transition: width 0.3s ease;
+        }
+        nav a:hover::after, nav a:focus::after {
+            width: 100%; /* Expand underline on hover or focus */
         }
         .logo img {
             height: 40px;
         }
         .hero {
-            padding: 100px 50px 50px;
+            padding: 100px 20px 80px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            padding-left: 50px; /* Added left padding */
+        }
+        .hero h1 {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 2.5rem; /* Increased font size */
+            font-weight: 700; /* Bold font */
+            line-height: 1.4; /* Improved line spacing */
+        }
+        .hero p {
+            font-family: 'DM Sans', sans-serif;
+            font-size: 1.2rem; /* Increased font size */
+            line-height: 1.6; /* Improved line spacing */
+            color: #333; /* Slightly darker text for readability */
+        }
+        .hero .contact-button {
+            background: #ffb703;
+            color: #000;
+            font-weight: bold;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+
         }
         .skills, .projects, .contact {
-            padding: 50px 20px;
+            padding: 20px;
+            padding-top: 0px; 
+            padding-bottom: 0px;
+            /* TRBL */
         }
-        .skills h2, .projects h2, .contact h2 {
-            padding-left: 20px;
+        .skills h2, .contact h2 {
+            padding: 50px 20px;
+            padding-bottom: 20px; /* Reduced padding-bottom */
+            padding-left: 50px; /* Added left padding */
+        }
+        .projects h2 {
+            padding: 0 0 20px 50px; /* Adjusted bottom padding for spacing */
+        }
+        .skills-container {
+            padding-top: 0px;
+            padding-left: 50px;
         }
         .skill {
-            margin-bottom: 10px;
+            margin-bottom: 30px;
+            padding-bottom: 5px; /* Added padding under skill name */
+        }
+        .skill div {
+            margin-top: 5px; /* Added padding between skill name and bars */
         }
         .bar {
-            height: 15px;
-            width: 100%;
+            height: 8px;
+            width: 80%;
             background: lightgray;
             border-radius: 10px;
             position: relative;
@@ -65,15 +121,16 @@
             background: #ffb703;
             border-radius: 10px;
         }
-        .projects {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+        .projects-container {
+            display: grid; /* Use grid layout */
+            grid-template-columns: repeat(3, 1fr); /* 3 cards per row */
+            gap: 30px; /* Space between cards */
+            max-width: 1200px;
+            margin: 0 auto;
         }
         .card {
             width: 250px;
-            border: 1px solid #ddd;
+            border: 3px solid #ffb703; /* Thin yellow accent outline */
             padding: 10px;
             text-align: center;
             border-radius: 10px;
@@ -83,20 +140,102 @@
             border-radius: 10px;
         }
         .visit {
-            display: block;
+            display: inline-block;
             margin-top: 10px;
-            color: #ffb703;
+            padding: 10px 20px;
+            background: #fff; /* White background for button */
+            color: black; /* Black text */
             font-weight: bold;
             text-decoration: none;
+            border: 2px solid #ffb703; /* Yellow border */
+            border-radius: 20px; /* Rounded corners */
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .visit:hover {
+            background: #ffb703; /* Yellow background on hover */
+            color: white; /* White text on hover */
+        }
+        .contact-form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+        .contact-form input, .contact-form textarea, .contact-form button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .contact-form button {
+            background: #ffb703;
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .contact-button {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #ffb703;
+            color: white;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 10px 0;
+        }
+        .social-links p {
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+        .social-icons-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+        .social-icon:hover {
+            transform: scale(1.1);
         }
         @media (max-width: 768px) {
             .hero {
                 flex-direction: column;
                 text-align: center;
             }
-            .projects {
+            .hero div {
+                max-width: 90%;
+            }
+            .projects-container {
                 flex-direction: column;
                 align-items: center;
+            }
+        }
+        @media (max-width: 400px) {
+            .social-icons-container {
+                gap: 10px;
+            }
+            .social-icon {
+                width: 25px;
+                height: 25px;
+            }
+        }
+        @media (min-width: 769px) {
+            .hero span {
+                padding-right: 300px; /* Increased right padding for web view */
             }
         }
     </style>
@@ -108,6 +247,7 @@
         </div>
         <div>
             <a href="#home">Home</a>
+            <a href="#skills">Skills</a> <!-- Added Skills section to navbar -->
             <a href="#projects">Projects</a>
             <a href="#contact">Contact</a>
         </div>
@@ -115,55 +255,83 @@
     <section class="hero" id="home">
         <div>
             <h1>Hey there! 👋<br>I'm Sai Nikhil Jallepalli</h1>
-            <p>I'm a passionate Machine Learning & Data Science Engineer...</p>
+            <p style="display: block; width: 1000px;">
+                I'm a passionate aspiring Data Scientist & MLOps Engineer eager to break into the industry. With 3+ years of learning ML, Deep Learning, and NLP 🤖, I’ve built projects that bridge theory with real-world AI applications. Skilled in Azure ☁️, Docker 🐳, Kubernetes ⚡, and CI/CD 🔄, I focus on seamless AI deployment. Now seeking opportunities to apply my expertise and grow in Data Science & MLOps. 💡 Always learning, building, and innovating! 🚀
+            </p>
+            <div style="position: relative; display: inline-block;">
+                <a href="#contact" class="contact-button">Contact Me!</a>
+                <div style="position: absolute; top: 22px; left: 10px; width: 140px; height: 40px; border: 3px solid black; pointer-events: none; box-sizing: border-box;"></div>
+            </div>
         </div>
-        <img src="image.png" alt="Profile Picture" width="200">
+        <span style="padding-right: 200px;">
+            <img src="image.png" alt="Profile Picture" width="400">
+        </span>
     </section>
-    <section class="skills">
+    <section class="skills" id="skills"> <!-- Added id="skills" -->
         <h2>Skills</h2>
-        <div class="skill">Python<div class="bar"><span style="width: 80%;"></span></div></div>
-        <div class="skill">Flask<div class="bar"><span style="width: 70%;"></span></div></div>
-        <div class="skill">Machine Learning<div class="bar"><span style="width: 85%;"></span></div></div>
-        <div class="skill">Docker<div class="bar"><span style="width: 60%;"></span></div></div>
+        <div class="skills-container">
+            <div class="skill">Python<div class="bar"><span style="width: 80%;"></span></div></div>
+            <div class="skill">Flask<div class="bar"><span style="width: 70%;"></span></div></div>
+            <div class="skill">Machine Learning<div class="bar"><span style="width: 85%;"></span></div></div>
+            <div class="skill">Docker<div class="bar"><span style="width: 60%;"></span></div></div>
+        </div>
     </section>
     <section class="projects" id="projects">
         <h2>Projects</h2>
-        <div class="card">
-            <img src="project1.jpg" alt="Project 1">
-            <h3>Sentiment Analysis</h3>
-            <p>Kaggle</p>
-            <a href="#" class="visit">Visit</a>
-        </div>
-        <div class="card">
-            <img src="project2.jpg" alt="Project 2">
-            <h3>Image Classification</h3>
-            <p>Kaggle</p>
-            <a href="#" class="visit">Visit</a>
-        </div>
-        <div class="card">
-            <img src="project3.jpg" alt="Project 3">
-            <h3>Chatbot</h3>
-            <p>Kaggle</p>
-            <a href="#" class="visit">Visit</a>
-        </div>
-        <div class="card">
-            <img src="project4.jpg" alt="Project 4">
-            <h3>Recommendation System</h3>
-            <p>Kaggle</p>
-            <a href="#" class="visit">Visit</a>
-        </div>
-        <div class="card">
-            <img src="project5.jpg" alt="Project 5">
-            <h3>Data Visualization</h3>
-            <p>Kaggle</p>
-            <a href="#" class="visit">Visit</a>
+        <div class="projects-container">
+            <div class="card">
+                <img src="hugging-face.png" alt="Text-Summarization">
+                <h3>Text Summarization LLM</h3>
+                <p>Used BART model from Hugging Face hub as API along with Gradio to develop a text summarization web app and deploy on Hugging Face Spaces.</p>
+                <a href="https://huggingface.co/spaces/your-profile/text-summarization" class="visit" target="_blank">Visit</a>
+            </div>
+            <div class="card">
+                <img src="project2.jpg" alt="Project 2">
+                <h3>Image Classification</h3>
+                <p>Kaggle</p>
+                <a href="https://www.kaggle.com/your-profile/image-classification" class="visit" target="_blank">Visit</a>
+            </div>
+            <div class="card">
+                <img src="project3.jpg" alt="Project 3">
+                <h3>Chatbot</h3>
+                <p>Streamlit</p>
+                <a href="https://your-app.streamlit.io" class="visit" target="_blank">Visit</a>
+            </div>
         </div>
     </section>
     <section class="contact" id="contact">
         <h2>Contact</h2>
-        <p>LinkedIn <a href="#" class="visit">Visit</a></p>
-        <p>GitHub <a href="#">Visit</a></p>
-        <p>Kaggle <a href="#">Visit</a></p>
+        <div class="contact-form">
+            <form>
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Your Email" required>
+                <div class="social-links">
+                    <p>Connect with me:</p>
+                    <div class="social-icons-container">
+                        <a href="https://www.linkedin.com/in/your-profile" target="_blank" title="LinkedIn">
+                            <img src="linkedin.png" alt="LinkedIn" class="social-icon">
+                        </a>
+                        <a href="https://github.com/your-profile" target="_blank" title="GitHub">
+                            <img src="github.png" alt="GitHub" class="social-icon">
+                        </a>
+                        <a href="https://www.kaggle.com/your-profile" target="_blank" title="Kaggle">
+                            <img src="kaggle.png" alt="Kaggle" class="social-icon">
+                        </a>
+                        <a href="https://huggingface.co/your-profile" target="_blank" title="Hugging Face">
+                            <img src="huggingface.png" alt="Hugging Face" class="social-icon">
+                        </a>
+                        <a href="https://your-app.streamlit.io" target="_blank" title="Streamlit">
+                            <img src="streamlit.png" alt="Streamlit" class="social-icon">
+                        </a>
+                        <a href="https://your-app.onrender.com" target="_blank" title="Render">
+                            <img src="render.png" alt="Render" class="social-icon">
+                        </a>
+                    </div>
+                </div>
+                <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+                <button type="submit">Send Message</button>
+            </form>
+        </div>
     </section>
 </body>
 </html>
