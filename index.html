@@ -324,6 +324,48 @@
                 display: block;
             }
         }
+        .intro-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            animation: fadeOutScreen 10s forwards; /* Fade out black screen after 6 seconds */
+        }
+        .intro-text {
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            overflow: hidden; /* Ensures the content is not revealed until the animation */
+            border-right: 0.15em solid orange; /* The typewriter cursor */
+            white-space: nowrap; /* Keeps the content on a single line */
+            margin: 0 auto; /* Centers the text */
+            letter-spacing: 0.15em; /* Adjust as needed */
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite, fadeOutText 4s forwards;
+        }
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: orange; }
+        }
+        @keyframes fadeOutText {
+            80% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        @keyframes fadeOutScreen {
+            100% {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -333,10 +375,18 @@
             hamburger.addEventListener("click", () => {
                 mobileMenu.style.display = mobileMenu.style.display === "flex" ? "none" : "flex";
             });
+
+            setTimeout(() => {
+                const introScreen = document.querySelector(".intro-screen");
+                introScreen.style.display = "none"; // Remove intro screen after animation
+            }, 6000); // 6 seconds
         });
     </script>
 </head>
 <body>
+    <div class="intro-screen">
+        <div class="intro-text">Nikhil Sastry</div>
+    </div>
     <nav>
         <div class="logo">
             <img src="logo.png" alt="Logo">
