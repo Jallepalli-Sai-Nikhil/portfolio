@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mark Smith - Portfolio</title>
+    <style>
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f3f0ff;
+            color: #333;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            text-align: center;
+            padding: 20px;
+        }
+        .profile {
+            background: #6a0dad;
+            padding: 40px;
+            border-radius: 20px;
+            color: white;
+        }
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 4px solid white;
+        }
+        h1 {
+            margin-top: 10px;
+        }
+        .section {
+            margin-top: 40px;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .project {
+            background: #d1b3ff;
+            padding: 15px;
+            border-radius: 10px;
+            transition: 0.3s;
+        }
+        .project:hover {
+            background: #b084ff;
+            color: white;
+            transform: scale(1.05);
+        }
+        .contact a {
+            display: inline-block;
+            margin: 10px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            background: #6a0dad;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .contact a:hover {
+            background: #4a087b;
+        }
+        @media (max-width: 600px) {
+            .profile img {
+                width: 100px;
+                height: 100px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <img src="image.png" alt="Profile Photo">
+            <h1>Mark Smith</h1>
+            <p>Data Science Enthusiast</p>
+        </div>
+        
+        <div class="section">
+            <h2>Projects</h2>
+            <div class="projects">
+                <div class="project">
+                    <h3>Project 1 - Data Analysis</h3>
+                    <p>Performed exploratory data analysis on large datasets to uncover trends and insights.</p>
+                </div>
+                <div class="project">
+                    <h3>Project 2 - Machine Learning Model</h3>
+                    <p>Developed a predictive model to classify customer behavior using machine learning algorithms.</p>
+                </div>
+                <div class="project">
+                    <h3>Project 3 - Deep Learning</h3>
+                    <p>Built a neural network for image recognition using TensorFlow and Keras.</p>
+                </div>
+                <div class="project">
+                    <h3>Project 4 - Data Visualization</h3>
+                    <p>Created interactive visualizations using Matplotlib and Seaborn to present key findings.</p>
+                </div>
+                <div class="project">
+                    <h3>Project 5 - NLP Application</h3>
+                    <p>Developed a chatbot using NLP techniques to automate customer support queries.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="section contact">
+            <h2>Contact</h2>
+            <a href="https://github.com/yourprofile" target="_blank">GitHub</a>
+            <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a>
+            <a href="https://www.kaggle.com/yourprofile" target="_blank">Kaggle</a>
+        </div>
+    </div>
+</body>
+</html>
