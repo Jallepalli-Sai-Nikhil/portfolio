@@ -16,6 +16,35 @@
             background-color: #FFFFFF;
             color: #000;
             overflow-x: hidden; /* Prevent horizontal scrolling */
+            transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for dark mode */
+        }
+        .dark-mode body {
+            background-color: #000814; /* Eye-friendly black */
+            color: #FFFFFF; /* White text */
+        }
+        .dark-mode nav a {
+            color: #FFFFFF; /* White text for navbar links */
+        }
+        .dark-mode nav a:hover, .dark-mode nav a:focus {
+            color: #ffb703; /* Yellow hover effect remains */
+        }
+        .dark-mode .mobile-menu a {
+            color: #FFFFFF; /* White text for mobile menu links */
+        }
+        .dark-mode .hero p {
+            color: #FFFFFF; /* White text for hero section */
+        }
+        .dark-mode .social-links p {
+            color: #FFFFFF; /* White text for social links */
+        }
+        .dark-mode .contact-form input, 
+        .dark-mode .contact-form textarea {
+            color: #FFFFFF; /* White text for form inputs */
+            background-color: #333; /* Darker background for inputs */
+            border: 1px solid #555; /* Adjusted border color */
+        }
+        .dark-mode .contact-form button {
+            color: #000; /* Keep button text black */
         }
         nav {
             display: flex;
@@ -29,6 +58,10 @@
             left: 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+        .dark-mode nav {
+            background: #000814; /* Match dark mode background */
         }
         .hamburger {
             display: none;
@@ -40,6 +73,10 @@
             height: 3px;
             background: black;
             margin: 4px 0;
+            transition: background-color 0.3s ease;
+        }
+        .dark-mode .hamburger div {
+            background: white; /* Change hamburger icon to white in dark mode */
         }
         .mobile-menu {
             display: none;
@@ -50,6 +87,9 @@
             left: 0;
             width: 100%;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode .mobile-menu {
+            background: #000814; /* Match dark mode background */
         }
         .mobile-menu a {
             padding: 10px 20px;
@@ -133,7 +173,8 @@
             padding: 0 0 20px 50px; /* Adjusted bottom padding for spacing */
         }
         .skills-container {
-            padding-top: 0px;
+            position: relative;
+            padding-top: 20px; /* Adjust padding after removing grid lines */
             padding-left: 50px;
         }
         .skill {
@@ -145,10 +186,13 @@
         }
         .bar {
             height: 8px;
-            width: 80%;
+            width: 100%; /* Set bar width to 100% for proper alignment */
             background: lightgray;
             border-radius: 10px;
             position: relative;
+        }
+        .dark-mode .bar {
+            background: #333; /* Darker bar background in dark mode */
         }
         .bar span {
             display: block;
@@ -185,6 +229,10 @@
             border: 2px solid #ffb703; /* Yellow border */
             border-radius: 20px; /* Rounded corners */
             transition: background 0.3s ease, color 0.3s ease;
+        }
+        .dark-mode .visit {
+            background: #000814; /* Match dark mode background */
+            color: white;
         }
         .visit:hover {
             background: #ffb703; /* Yellow background on hover */
@@ -253,11 +301,20 @@
                 align-items: center;
                 padding: 15px 20px;
             }
+            .desktop-menu {
+                display: none; /* Hide desktop menu in mobile view */
+            }
+            .dark-mode-button {
+                position: absolute; /* Keep absolute positioning */
+                left: 20px; /* Adjust for mobile view */
+                top: 50%;
+                transform: translateY(-50%); /* Center vertically */
+                width: 40px;
+                height: 40px;
+            }
             .hamburger {
                 display: flex;
-            }
-            .desktop-menu {
-                display: none;
+                order: 2; /* Place hamburger icon to the right of the dark mode button */
             }
             .hero {
                 flex-direction: column;
@@ -302,6 +359,9 @@
             .social-icons-container {
                 justify-content: center;
                 gap: 10px;
+            }
+            .mobile-menu {
+                display: none; /* Initially hide the mobile menu */
             }
         }
         @media (max-width: 400px) {
@@ -366,6 +426,28 @@
                 visibility: hidden;
             }
         }
+        .dark-mode-button {
+            position: absolute;
+            left: 100px; /* Adjusted for web view */
+            top: 50%;
+            transform: translateY(-50%); /* Center vertically */
+            width: 40px;
+            height: 40px;
+            background: #ffb703;
+            color: #000;
+            border: none;
+            border-radius: 50%; /* Rounded button */
+            cursor: pointer;
+            z-index: 1001;
+            font-size: 1.2rem; /* Adjust font size for emoji */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+        .dark-mode-button:hover {
+            background: #ffa500;
+        }
     </style>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -380,6 +462,23 @@
                 const introScreen = document.querySelector(".intro-screen");
                 introScreen.style.display = "none"; // Remove intro screen after animation
             }, 6000); // 6 seconds
+
+            const toggleDarkMode = () => {
+                const isDarkMode = document.documentElement.classList.toggle("dark-mode");
+                const darkModeButton = document.querySelector(".dark-mode-button");
+                darkModeButton.textContent = isDarkMode ? "🌙" : "☀️"; // Moon for dark mode, sun for bright mode
+            };
+
+            const darkModeButton = document.createElement("button");
+            darkModeButton.textContent = "☀️"; // Default to sun emoji
+            darkModeButton.className = "dark-mode-button";
+
+            // Add the button to both desktop and mobile menus
+            document.querySelector("nav").appendChild(darkModeButton);
+            mobileMenu.prepend(darkModeButton.cloneNode(true));
+
+            darkModeButton.addEventListener("click", toggleDarkMode);
+            mobileMenu.querySelector(".dark-mode-button").addEventListener("click", toggleDarkMode);
         });
     </script>
 </head>
@@ -400,12 +499,15 @@
             <a href="#home">Home</a>
             <a href="#skills">Skills</a> <!-- Added Skills section to navbar -->
             <a href="#projects">Projects</a>
+            <a href="#certifications">Certificates</a> <!-- Added Certificates -->
             <a href="#contact">Contact</a>
         </div>
         <div class="mobile-menu">
+            <!-- Dark mode button will be prepended here dynamically -->
             <a href="#home">Home</a>
             <a href="#skills">Skills</a>
             <a href="#projects">Projects</a>
+            <a href="#certifications">Certificates</a> <!-- Added Certificates -->
             <a href="#contact">Contact</a>
         </div>
     </nav>
@@ -436,10 +538,20 @@
     <section class="skills" id="skills"> <!-- Added id="skills" -->
         <h2>Skills</h2>
         <div class="skills-container">
-            <div class="skill">Python<div class="bar"><span style="width: 80%;"></span></div></div>
-            <div class="skill">Flask<div class="bar"><span style="width: 70%;"></span></div></div>
-            <div class="skill">Machine Learning<div class="bar"><span style="width: 85%;"></span></div></div>
-            <div class="skill">Docker<div class="bar"><span style="width: 60%;"></span></div></div>
+            <div class="skill">Data Analysis: 80%<div class="bar"><span style="width: 80%;"></span></div></div>
+            <div class="skill">Data Visualization: 75%<div class="bar"><span style="width: 75%;"></span></div></div>
+            <div class="skill">MS-SQL: 85%<div class="bar"><span style="width: 85%;"></span></div></div>
+            <div class="skill">Python: 90%<div class="bar"><span style="width: 90%;"></span></div></div>
+            <div class="skill">C Programming: 80%<div class="bar"><span style="width: 80%;"></span></div></div>
+            <div class="skill">Machine Learning: 90%<div class="bar"><span style="width: 90%;"></span></div></div>
+            <div class="skill">Python Data Analysis: 90%<div class="bar"><span style="width: 90%;"></span></div></div>
+            <div class="skill">TensorFlow: 80%<div class="bar"><span style="width: 80%;"></span></div></div>
+            <div class="skill">Flask: 70%<div class="bar"><span style="width: 70%;"></span></div></div>
+            <div class="skill">Deep Learning: 85%<div class="bar"><span style="width: 85%;"></span></div></div>
+            <div class="skill">NLP: 85%<div class="bar"><span style="width: 85%;"></span></div></div>
+            <div class="skill">Azure: 70%<div class="bar"><span style="width: 70%;"></span></div></div>
+            <div class="skill">GitHub Actions CI/CD: 90%<div class="bar"><span style="width: 90%;"></span></div></div>
+            <div class="skill">Docker: 95%<div class="bar"><span style="width: 95%;"></span></div></div>
         </div>
     </section>
     <section class="projects" id="projects">
@@ -462,6 +574,33 @@
                 <h3>Chatbot</h3>
                 <p>Streamlit</p>
                 <a href="https://your-app.streamlit.io" class="visit" target="_blank">Visit</a>
+            </div>
+        </div>
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="https://www.kaggle.com/your-profile" target="_blank" class="visit">Kaggle Profile</a>
+            <a href="https://github.com/your-profile" target="_blank" class="visit" style="margin-left: 20px;">GitHub Profile</a>
+        </div>
+    </section>
+    <section class="certifications" id="certifications">
+        <h2>Certifications</h2>
+        <div class="projects-container">
+            <div class="card">
+                <img src="cert1.jpg" alt="Certification 1">
+                <h3>Data Science Certification</h3>
+                <p>Issued by Coursera</p>
+                <a href="https://coursera.org" class="visit" target="_blank">View</a>
+            </div>
+            <div class="card">
+                <img src="cert2.jpg" alt="Certification 2">
+                <h3>Machine Learning Certification</h3>
+                <p>Issued by edX</p>
+                <a href="https://edx.org" class="visit" target="_blank">View</a>
+            </div>
+            <div class="card">
+                <img src="cert3.jpg" alt="Certification 3">
+                <h3>Cloud Computing Certification</h3>
+                <p>Issued by AWS</p>
+                <a href="https://aws.amazon.com" class="visit" target="_blank">View</a>
             </div>
         </div>
     </section>
