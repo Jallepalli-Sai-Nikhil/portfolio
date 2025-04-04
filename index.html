@@ -59,6 +59,7 @@
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             z-index: 1000;
             transition: background-color 0.3s ease;
+            position: relative; /* Ensure the dark mode button is positioned relative to the navbar */
         }
         .dark-mode nav {
             background: #000814; /* Match dark mode background */
@@ -306,9 +307,9 @@
             }
             .dark-mode-button {
                 position: absolute; /* Keep absolute positioning */
-                left: 20px; /* Adjust for mobile view */
+                left: 50%;
                 top: 50%;
-                transform: translateY(-50%); /* Center vertically */
+                transform: translate(-50%, -50%); /* Center horizontally and vertically */
                 width: 40px;
                 height: 40px;
             }
@@ -428,9 +429,9 @@
         }
         .dark-mode-button {
             position: absolute;
-            left: 100px; /* Adjusted for web view */
             top: 50%;
-            transform: translateY(-50%); /* Center vertically */
+            left: 50%;
+            transform: translate(-50%, -50%); /* Center horizontally and vertically */
             width: 40px;
             height: 40px;
             background: #ffb703;
@@ -447,6 +448,11 @@
         }
         .dark-mode-button:hover {
             background: #ffa500;
+        }
+        @media (max-width: 768px) {
+            .dark-mode-button {
+                left: 50%; /* Increased left padding for mobile view */
+            }
         }
     </style>
     <script>
@@ -473,12 +479,10 @@
             darkModeButton.textContent = "☀️"; // Default to sun emoji
             darkModeButton.className = "dark-mode-button";
 
-            // Add the button to both desktop and mobile menus
+            // Add the button to the navbar
             document.querySelector("nav").appendChild(darkModeButton);
-            mobileMenu.prepend(darkModeButton.cloneNode(true));
 
             darkModeButton.addEventListener("click", toggleDarkMode);
-            mobileMenu.querySelector(".dark-mode-button").addEventListener("click", toggleDarkMode);
         });
     </script>
 </head>
@@ -495,6 +499,7 @@
             <div></div>
             <div></div>
         </div>
+        <!-- Dark mode button will be dynamically added here -->
         <div class="desktop-menu">
             <a href="#home">Home</a>
             <a href="#skills">Skills</a> <!-- Added Skills section to navbar -->
